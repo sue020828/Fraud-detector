@@ -25,20 +25,20 @@ CREATE TABLE transactions (
     FOREIGN KEY (account_id) REFERENCES accounts(account_id) ON DELETE CASCADE
 );
 
--- Insert sample customers
+
 INSERT INTO customers (first_name, last_name, email, phone)
 VALUES 
 ('Alice', 'Smith', 'alice.smith@example.com', '123-456-7890'),
 ('Bob', 'Brown', 'bob.brown@example.com', '234-567-8901');
 
--- Insert sample accounts
+
 INSERT INTO accounts (customer_id, account_type, balance)
 VALUES
 (1, 'Checking', 5000.00),
 (1, 'Savings', 15000.00),
 (2, 'Checking', 3000.00);
 
--- Insert sample transactions
+
 INSERT INTO transactions (account_id, transaction_type, amount)
 VALUES
 (1, 'Deposit', 2000.00),
@@ -46,7 +46,7 @@ VALUES
 (2, 'Transfer', 4000.00),  -- Suspicious due to amount
 (3, 'Withdrawal', 1500.00);
 
--- Identify and flag suspicious transactions
+
 INSERT INTO fraud_flags (transaction_id, flag_reason)
 SELECT transaction_id, 'High transaction amount'
 FROM transactions
